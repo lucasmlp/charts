@@ -90,3 +90,4 @@ ui-plugin-operator:
 ui-plugin-operator-crd:
   - 103.0.2+up0.2.1
   - 104.0.0+up0.2.1
+  - 105.0.0+up0.2.1

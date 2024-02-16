@@ -5,6 +5,13 @@ on:
     branches:
       - dev-v*
       - release-v*
+    paths:
+      - 'assets/**'
+      - 'charts/**'
+      - 'packages/**'
+      - 'configuration.yaml'
+      - 'release.yaml'
+      - 'index.yaml'
 
 jobs:
   build:

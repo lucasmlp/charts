@@ -741,32 +741,6 @@ entries:
       catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.8.0-0'
       catalog.cattle.io/release-name: fleet
     apiVersion: v2
-    appVersion: 0.8.1
-    created: "2023-12-04T13:13:18.369065-03:00"
-    dependencies:
-    - condition: gitops.enabled
-      name: gitjob
-      repository: file://./charts/gitjob
-    description: Fleet Manager - GitOps at Scale
-    digest: caa36338fba7e25713036091cf29b8132601ac24a273514a632d66b461204420
-    icon: https://charts.rancher.io/assets/logos/fleet.svg
-    name: fleet
-    urls:
-    - assets/fleet/fleet-102.2.1+up0.8.1.tgz
-    version: 102.2.1+up0.8.1
-  - annotations:
-      catalog.cattle.io/auto-install: fleet-crd=match
-      catalog.cattle.io/certified: rancher
-      catalog.cattle.io/experimental: "true"
-      catalog.cattle.io/hidden: "true"
-      catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.27.0-0'
-      catalog.cattle.io/namespace: cattle-fleet-system
-      catalog.cattle.io/os: linux
-      catalog.cattle.io/permits-os: linux,windows
-      catalog.cattle.io/provides-gvr: clusters.fleet.cattle.io/v1alpha1
-      catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.8.0-0'
-      catalog.cattle.io/release-name: fleet
-    apiVersion: v2
     appVersion: 0.8.0
     created: "2023-09-21T15:04:34.335851-07:00"
     dependencies:
@@ -1387,25 +1361,6 @@ entries:
     urls:
     - assets/fleet-agent/fleet-agent-102.2.2+up0.8.2.tgz
     version: 102.2.2+up0.8.2
-  - annotations:
-      catalog.cattle.io/certified: rancher
-      catalog.cattle.io/hidden: "true"
-      catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.27.0-0'
-      catalog.cattle.io/namespace: cattle-fleet-system
-      catalog.cattle.io/os: linux
-      catalog.cattle.io/permits-os: linux,windows
-      catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.8.0-0'
-      catalog.cattle.io/release-name: fleet-agent
-    apiVersion: v2
-    appVersion: 0.8.1
-    created: "2023-12-04T13:14:21.864382-03:00"
-    description: Fleet Manager Agent - GitOps at Scale
-    digest: 32d0e4d8bc7407614613a85a2682e05dfe2a9f3b0688f524a81f0f53f25e53ac
-    icon: https://charts.rancher.io/assets/logos/fleet.svg
-    name: fleet-agent
-    urls:
-    - assets/fleet-agent/fleet-agent-102.2.1+up0.8.1.tgz
-    version: 102.2.1+up0.8.1
   - annotations:
       catalog.cattle.io/certified: rancher
       catalog.cattle.io/hidden: "true"
@@ -6140,37 +6095,6 @@ entries:
     urls:
     - assets/neuvector-monitor/neuvector-monitor-103.0.2+up2.7.3.tgz
     version: 103.0.2+up2.7.3
-  - annotations:
-      catalog.cattle.io/certified: rancher
-      catalog.cattle.io/display-name: NeuVector Monitor
-      catalog.cattle.io/kube-version: '>=1.18.0-0 < 1.28.0-0'
-      catalog.cattle.io/namespace: cattle-neuvector-system
-      catalog.cattle.io/os: linux
-      catalog.cattle.io/permits-os: linux
-      catalog.cattle.io/provides-gvr: neuvector.com/v1
-      catalog.cattle.io/rancher-version: '>= 2.8.0-0 < 2.9.0-0'
-      catalog.cattle.io/release-name: neuvector-monitor
-      catalog.cattle.io/type: cluster-tool
-      catalog.cattle.io/upstream-version: 2.7.1
-    apiVersion: v1
-    appVersion: 5.2.4-s1
-    created: "2024-01-29T12:41:54.913350164-08:00"
-    description: Helm feature chart (optional) add-on to NeuVector for monitoring
-      with Prometheus/Grafana.
-    digest: ee41c77aceea46be6193ee3392b3a077f9d741035e00a2615366d9ffd0283429
-    home: https://neuvector.com
-    icon: https://avatars2.githubusercontent.com/u/19367275?s=200&v=4
-    keywords:
-    - security
-    maintainers:
-    - email: support@neuvector.com
-      name: becitsthere
-    name: neuvector-monitor
-    sources:
-    - https://github.com/neuvector/neuvector
-    urls:
-    - assets/neuvector-monitor/neuvector-monitor-103.0.1+up2.7.1.tgz
-    version: 103.0.1+up2.7.1
   - annotations:
       catalog.cattle.io/certified: rancher
       catalog.cattle.io/display-name: NeuVector Monitor

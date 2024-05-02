@@ -1,0 +1,66 @@
+name: Forward Port Assets
+
+on:
+  push:
+    branches:
+      - 'release-v*'
+    paths:
+      - 'assets/**'
+  workflow_dispatch:
+
+jobs:
+  forward_port:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2  # Fetches two commits to ensure HEAD~1 is available
+
+      - name: Set up Git config
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+
+      - name: Extract assets and versions
+        run: |
+          echo "::group::Extracting assets and versions"
+          for file in $(git diff-tree --no-commit-id --name-only -r HEAD~1 HEAD); do
+            if [[ $file == assets/* ]]; then
+              assetName=$(basename $file)
+              assetVersion=$(echo $assetName | sed -n 's/.*-\([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p')
+              echo "Asset Name: $assetName"
+              echo "Asset Version: $assetVersion"
+            fi
+          done
+          echo "::endgroup::"
+
+      # - name: Forward-port changes
+      #   if: steps.assets.outputs.assets != ''
+      #   run: |
+      #     IFS=' ' read -r -a assetArray <<< "${{ steps.assets.outputs.assets }}"
+      #     IFS=' ' read -r -a versionArray <<< "${{ steps.assets.outputs.versions }}"
+      #     branchName=$(echo $GITHUB_REF | sed -n 's/.*release-v\([0-9]*\.[0-9]*\).*/\1/p')
+      #     major=$(echo $branchName | cut -d. -f1)
+      #     minor=$(echo $branchName | cut -d. -f2)
+      #     minor=$((minor+1))
+      #     targetBranch="dev-v$major.$minor"
+      #     for i in "${!assetArray[@]}"; do
+      #       assetName=${assetArray[i]}
+      #       assetVersion=${versionArray[i]}
+      #       make forward-port CHART=$assetName VERSION=$assetVersion BRANCH=$branchName UPSTREAM=upstream
+      #       git add .
+      #       git commit -m "make forward-port $assetName $assetVersion"
+      #     done
+      #     git push -u origin HEAD:refs/heads/$targetBranch
+      #     echo "::set-output name=target_branch::$targetBranch"
+
+      # - name: Create pull request
+      #   uses: repo-sync/pull-request@v2
+      #   if: steps.assets.outputs.assets != ''
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     source_branch: "${{ steps.forward_port.outputs.target_branch }}"
+      #     destination_branch: 'main' # Update to your target branch if needed
+      #     title: 'Forward Port Changes'
+      #     body: 'This PR forward-ports the assets to the next minor version development branch.'

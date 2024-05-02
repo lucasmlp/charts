@@ -1,0 +1,38 @@
+name: Forward Port Assets
+
+on:
+  push:
+    branches:
+      - 'release-v*'
+    paths:
+      - 'assets/**'
+  workflow_dispatch:
+
+jobs:
+  forward_port:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2  # Fetch enough history for HEAD~1
+
+      - name: Set up Git config
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+
+      - name: Extract assets and versions
+        run: |
+          echo "::group::Extracting assets and versions"
+          files=$(git diff-tree --no-commit-id --name-only -r HEAD~1 HEAD)
+          for file in $files; do
+            if [[ $file == assets/* ]]; then
+              filename=$(basename "$file" .tgz)
+              assetName=$(echo "$filename" | rev | cut -d'-' -f2- | rev)
+              assetVersion=$(echo "$filename" | rev | cut -d'-' -f1 | rev)
+              echo "Asset Name: $assetName"
+              echo "Asset Version: $assetVersion"
+            fi
+          done
+          echo "::endgroup::"

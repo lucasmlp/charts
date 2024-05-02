@@ -27,8 +27,8 @@ jobs:
           for file in $(git diff-tree --no-commit-id --name-only -r HEAD~1 HEAD); do
             if [[ $file == assets/* ]]; then
               filename=$(basename "$file" .tgz)
-              assetName=$(echo "$filename" | cut -d '+' -f 1)
-              assetVersion=$(echo "$filename" | sed 's/^[^+]*+//')
+              assetName=$(echo "$filename" | grep -o '^[^-]*[a-zA-Z]')
+              assetVersion=$(echo "$filename" | grep -o '[0-9]+.*')
               echo "Asset Name: $assetName"
               echo "Asset Version: $assetVersion"
             fi

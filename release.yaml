@@ -1,4 +1,2 @@
-longhorn:
-  - 102.3.3+up1.5.5
-longhorn-crd:
-  - 102.3.3+up1.5.5
+elemental:
+  - 103.1.1+up1.4.2
